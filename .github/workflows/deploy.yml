@@ -49,5 +49,4 @@ jobs:
           push: true
           tags: |
             docker.pkg.github.com/oms-opensource-minigame-server/oms-core/oms-core:${{ github.sha }}
-            docker.pkg.github.com/oms-opensource-minigame-server/oms-core/oms-core:${{ github.ref }}
             docker.pkg.github.com/oms-opensource-minigame-server/oms-core/oms-core:latest
