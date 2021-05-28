@@ -1,0 +1,4 @@
+version: ${version}
+name: OMS-Core
+main: fun.reallyisnt.oms.core.OMSCore
+depend: [Vault]
