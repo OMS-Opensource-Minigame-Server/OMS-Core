@@ -2,3 +2,12 @@ version: ${version}
 name: OMS-Core
 main: fun.reallyisnt.oms.core.OMSCore
 depend: [Vault]
+
+commands:
+  message:
+    usage: "/msg <player> <message>"
+    permission: oms.commands.msg
+
+permissions:
+  oms.commands.msg:
+    default: true
