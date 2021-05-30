@@ -1,10 +1,10 @@
 package fun.reallyisnt.oms.core.modules.dms;
 
-import fun.reallyisnt.oms.core.Config;
+import fun.reallyisnt.oms.common.Config;
+import fun.reallyisnt.oms.core.Module;
 import fun.reallyisnt.oms.core.OMSCore;
-import fun.reallyisnt.oms.core.modules.Module;
-import fun.reallyisnt.oms.core.modules.dms.listeners.JoinListener;
 import fun.reallyisnt.oms.core.modules.dms.listeners.LeaveListener;
+import fun.reallyisnt.oms.core.modules.dms.listeners.JoinListener;
 
 public class DMModule extends Module {
 

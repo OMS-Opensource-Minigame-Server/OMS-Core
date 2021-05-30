@@ -1,6 +1,6 @@
 package fun.reallyisnt.oms.core.modules.dms.commands;
 
-import fun.reallyisnt.oms.core.Config;
+import fun.reallyisnt.oms.common.Config;
 import fun.reallyisnt.oms.core.OMSCore;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class Message extends Command {
     protected Message() {

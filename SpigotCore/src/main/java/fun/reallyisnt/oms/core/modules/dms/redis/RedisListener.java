@@ -1,6 +1,5 @@
 package fun.reallyisnt.oms.core.modules.dms.redis;
 
-import fun.reallyisnt.oms.core.OMSCore;
 import redis.clients.jedis.JedisPubSub;
 
 public class RedisListener extends JedisPubSub {

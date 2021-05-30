@@ -1,9 +1,9 @@
-package fun.reallyisnt.oms.core;
+package fun.reallyisnt.oms.common;
 
 public enum Permissions {
     COMMANDS_MESSAGE("oms.commands.msg");
 
-    private String node;
+    private final String node;
 
     Permissions(String s) {
         this.node = s;

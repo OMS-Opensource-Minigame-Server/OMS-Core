@@ -1,8 +1,7 @@
-package fun.reallyisnt.oms.core.modules;
+package fun.reallyisnt.oms.core;
 
 import com.destroystokyo.paper.utils.PaperPluginLogger;
 import com.google.common.base.Charsets;
-import fun.reallyisnt.oms.core.OMSCore;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
