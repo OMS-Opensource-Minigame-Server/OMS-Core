@@ -43,8 +43,8 @@ jobs:
           file: ./bungee-core/Dockerfile
           push: true
           tags: |
-            docker.pkg.github.com/oms-opensource-minigame-server/oms-bungee/oms-bungeecore:${{ github.sha }}
-            docker.pkg.github.com/oms-opensource-minigame-server/oms-bungee/oms-bungeecore:latest
+            docker.pkg.github.com/oms-opensource-minigame-server/oms-core/oms-bungeecore:${{ github.sha }}
+            docker.pkg.github.com/oms-opensource-minigame-server/oms-core/oms-bungeecore:latest
 
       - name: Build spigot image
         uses: docker/build-push-action@v2
