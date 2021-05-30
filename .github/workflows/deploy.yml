@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  maven:
+  deploy:
     runs-on: ubuntu-latest
 
     permissions:
@@ -36,31 +36,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-
-
-  deploy-spigot:
-    runs-on: ubuntu-latest
-
-    needs: [maven]
-
-    steps:
-      - name: Build container image
-        uses: docker/build-push-action@v2
-        with:
-          context: ./spigot-core
-          file: ./spigot-core/Dockerfile
-          push: true
-          tags: |
-            docker.pkg.github.com/oms-opensource-minigame-server/oms-core/oms-spigotcore:${{ github.sha }}
-            docker.pkg.github.com/oms-opensource-minigame-server/oms-core/oms-spigotcore:latest
-
-  docker-bungee:
-    runs-on: ubuntu-latest
-
-    needs: [maven]
-
-    steps:
-      - name: Build container image
+      - name: Build bungee image
         uses: docker/build-push-action@v2
         with:
           context: ./bungee-core
@@ -69,3 +45,13 @@ jobs:
           tags: |
             docker.pkg.github.com/oms-opensource-minigame-server/oms-bungee/oms-bungeecore:${{ github.sha }}
             docker.pkg.github.com/oms-opensource-minigame-server/oms-bungee/oms-bungeecore:latest
+
+      - name: Build spigot image
+        uses: docker/build-push-action@v2
+        with:
+          context: ./spigot-core
+          file: ./spigot-core/Dockerfile
+          push: true
+          tags: |
+            docker.pkg.github.com/oms-opensource-minigame-server/oms-core/oms-spigotcore:${{ github.sha }}
+            docker.pkg.github.com/oms-opensource-minigame-server/oms-core/oms-spigotcore:latest
