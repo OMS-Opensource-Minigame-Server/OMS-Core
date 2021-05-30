@@ -1,11 +1,11 @@
-package fun.reallyisnt.oms.core.modules;
+package fun.reallyisnt.oms.core;
 
 import fun.reallyisnt.oms.core.modules.dms.DMModule;
 
 public enum Modules {
     DMS(DMModule.class);
 
-    private Class<? extends Module> clazz;
+    private final Class<? extends Module> clazz;
 
     Modules(Class<? extends Module> clazz) {
         this.clazz = clazz;

@@ -1,7 +1,6 @@
 package fun.reallyisnt.oms.core;
 
-import fun.reallyisnt.oms.core.modules.Module;
-import fun.reallyisnt.oms.core.modules.Modules;
+import fun.reallyisnt.oms.common.Config;
 import org.bukkit.plugin.java.JavaPlugin;
 import redis.clients.jedis.Jedis;
 
@@ -21,7 +20,7 @@ public class OMSCore extends JavaPlugin {
         if (envStr != null) {
             return envStr;
         } else {
-            return this.getConfig().getString(node.path);
+            return this.getConfig().getString(node.getPath());
         }
     }
 

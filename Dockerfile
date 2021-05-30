@@ -9,7 +9,7 @@ RUN mkdir /home/container &&\
     wget https://papermc.io/api/v2/projects/paper/versions/1.16.5/builds/742/downloads/paper-1.16.5-742.jar -O /home/container/server.jar &&\
     wget https://github.com/MilkBowl/Vault/releases/download/1.7.3/Vault.jar -O /home/container/plugins/Vault.jar &&\
     echo "eula=true" >> /home/container/eula.txt
-COPY --from=0 /tmp/build/target/core-*-SNAPSHOT.jar /home/container/plugins/core.jar
+COPY --from=0 /tmp/build/SpigotCore/target/core-*-SNAPSHOT.jar /home/container/plugins/core.jar
 
 WORKDIR /home/container
 
