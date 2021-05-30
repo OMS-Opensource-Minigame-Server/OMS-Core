@@ -16,15 +16,15 @@ public class LobbyWrapper {
     }
 
     public String getName() {
-        return server.name();
+        return server.getName();
     }
 
     public int getPlayerCount() {
-        return server.playerCount();
+        return server.getPlayerCount();
     }
 
     public int getMaxPlayerCount() {
-        return server.maxPlayerCount();
+        return server.getMaxPlayerCount();
     }
 
     public void increment() {

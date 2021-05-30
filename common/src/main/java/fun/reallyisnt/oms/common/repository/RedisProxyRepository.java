@@ -44,9 +44,9 @@ public class RedisProxyRepository {
             long seconds = TIMEOUT / 1000;
 
             Transaction transaction = jedis.multi();
-            transaction.zadd(REPOSITORY_KEY + "proxies", currentTime + seconds, proxyServer.name());
-            transaction.hset(REPOSITORY_KEY + proxyServer.name(), proxyServer.serialize());
-            transaction.expire(REPOSITORY_KEY + proxyServer.name(), seconds);
+            transaction.zadd(REPOSITORY_KEY + "proxies", currentTime + seconds, proxyServer.getName());
+            transaction.hset(REPOSITORY_KEY + proxyServer.getName(), proxyServer.serialize());
+            transaction.expire(REPOSITORY_KEY + proxyServer.getName(), seconds);
             transaction.exec();
         }
     }

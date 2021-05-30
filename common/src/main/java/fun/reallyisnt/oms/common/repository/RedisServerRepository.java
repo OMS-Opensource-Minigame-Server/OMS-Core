@@ -51,9 +51,9 @@ public class    RedisServerRepository {
             long seconds = TIMEOUT / 1000;
 
             Transaction transaction = jedis.multi();
-            transaction.zadd(REPOSITORY_KEY + "servers", currentTime + seconds, serverData.name());
-            transaction.hset(REPOSITORY_KEY + serverData.name(), serverData.serialize());
-            transaction.expire(REPOSITORY_KEY + serverData.name(), seconds);
+            transaction.zadd(REPOSITORY_KEY + "servers", currentTime + seconds, serverData.getName());
+            transaction.hset(REPOSITORY_KEY + serverData.getName(), serverData.serialize());
+            transaction.expire(REPOSITORY_KEY + serverData.getName(), seconds);
             transaction.exec();
         }
     }

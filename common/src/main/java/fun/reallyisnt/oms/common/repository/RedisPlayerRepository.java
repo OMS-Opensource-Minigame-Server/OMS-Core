@@ -44,10 +44,10 @@ public class RedisPlayerRepository {
         try (Jedis jedis = jedisPool.getResource()) {
             Transaction transaction = jedis.multi();
             for (OnlinePlayer onlinePlayer : onlinePlayers) {
-                transaction.hset(REPOSITORY_KEY + onlinePlayer.name(), onlinePlayer.serialize());
-                transaction.expire(REPOSITORY_KEY + onlinePlayer.name(), TIMEOUT / 1000);
-                transaction.hset(REPOSITORY_KEY + onlinePlayer.uuid().toString(), onlinePlayer.serialize());
-                transaction.expire(REPOSITORY_KEY + onlinePlayer.uuid(), TIMEOUT / 1000);
+                transaction.hset(REPOSITORY_KEY + onlinePlayer.getName(), onlinePlayer.serialize());
+                transaction.expire(REPOSITORY_KEY + onlinePlayer.getName(), TIMEOUT / 1000);
+                transaction.hset(REPOSITORY_KEY + onlinePlayer.getUuid().toString(), onlinePlayer.serialize());
+                transaction.expire(REPOSITORY_KEY + onlinePlayer.getUuid(), TIMEOUT / 1000);
             }
 
             transaction.exec();

@@ -48,13 +48,13 @@ public class ServerManager implements Runnable, Listener {
     @Override
     public void run() {
         Map<String, ServerInfo> map = plugin.getProxy().getServers();
-        Map<String, ServerData> serverDataMap = repository.getServers().stream().collect(Collectors.toMap(ServerData::name, o -> o));
+        Map<String, ServerData> serverDataMap = repository.getServers().stream().collect(Collectors.toMap(ServerData::getName, o -> o));
 
         lobbies = serverDataMap.values().stream().map(LobbyWrapper::new).collect(Collectors.toList());
         for (ServerData server : serverDataMap.values()) {
-            if (!map.containsKey(server.name())) {
-                ServerInfo info = plugin.getProxy().constructServerInfo(server.name(), new InetSocketAddress(server.ipAddress(), 25565), "", false);
-                map.put(server.name(), info);
+            if (!map.containsKey(server.getName())) {
+                ServerInfo info = plugin.getProxy().constructServerInfo(server.getName(), new InetSocketAddress(server.getIpAddress(), 25565), "", false);
+                map.put(server.getName(), info);
             }
         }
 
