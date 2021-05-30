@@ -29,7 +29,7 @@ public class ProxyManager implements Runnable, Listener {
 
         int totalPlayerCount = 0;
         for (ProxyServer proxyServer : repository.getProxyServers()) {
-            totalPlayerCount += proxyServer.playerCount();
+            totalPlayerCount += proxyServer.getPlayerCount();
         }
 
         playerCount.set(totalPlayerCount);
