@@ -4,6 +4,7 @@ public enum Config {
 
     REDIS_ENABLED("redis.enabled"),
     REDIS_HOST("redis.host"),
+    REDIS_PORT("redis.port"),
     REDIS_PASSWORD("redis.password"),
 
     AGONES_ENABLED("agones.enabled");
