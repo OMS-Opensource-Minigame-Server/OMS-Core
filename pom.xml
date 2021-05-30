@@ -9,7 +9,8 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>common</module>
-        <module>spigotcore</module>
+        <module>spigot-core</module>
+        <module>bungee-core</module>
     </modules>
     <packaging>pom</packaging>
 

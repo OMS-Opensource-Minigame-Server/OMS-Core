@@ -1,0 +1,4 @@
+name: Bungee-Core
+version: ${project.version}
+main: fun.reallyisnt.oms.bungeecore.BungeeCore
+description: OMS Core for Bungeecord

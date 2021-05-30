@@ -1,0 +1,2 @@
+sendformat: "%prefix%%sendername% -> %receivername%: %message%"
+fromformat: "%prefix%%sendername% -> %receivername%: %message%"
