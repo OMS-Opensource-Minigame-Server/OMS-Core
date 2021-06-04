@@ -25,4 +25,4 @@ jobs:
           distribution: 'adopt'
 
       - name: Publish package
-        run: mvn package -DskipTests
+        run: mvn package
