@@ -23,27 +23,28 @@ public final class BungeeCore extends Plugin {
 
     @Override
     public void onEnable() {
-        if(!getDataFolder().exists()) {
-            getDataFolder().mkdir();
-            try {
-                File file = new File(getDataFolder(), "config.yml");
-                if(!file.exists()) {
-                    file.createNewFile();
-                }
-
-                config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(file);
-            } catch (IOException e) {
-                this.getLogger().log(Level.SEVERE, "Failed to load config", e);
+        try {
+            if(!getDataFolder().exists()) {
+                getDataFolder().mkdir();
             }
+
+            File file = new File(getDataFolder(), "config.yml");
+            if(!file.exists()) {
+                file.createNewFile();
+            }
+
+            config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(file);
+        } catch (IOException e) {
+            this.getLogger().log(Level.SEVERE, "Failed to load config", e);
         }
 
-        if (getConfigString(Config.REDIS_ENABLED, "true").equalsIgnoreCase("true")) {
+        if (getConfigBoolean(Config.REDIS_ENABLED)) {
             this.jedisPool = new JedisPool(new GenericObjectPoolConfig<>(), getConfigString(Config.REDIS_HOST), Integer.parseInt(getConfigString(Config.REDIS_PORT)), 100, getConfigString(Config.REDIS_PASSWORD));
             ProxyManager proxyManager = new ProxyManager(this, jedisPool);
             new PlayerManager(this, proxyManager, jedisPool);
         }
 
-        if (getConfigString(Config.AGONES_ENABLED, "true").equalsIgnoreCase("true")) {
+        if (getConfigBoolean(Config.AGONES_ENABLED)) {
             getProxy().getPluginManager().registerListener(this, new AgonesManager(this));
         }
 
@@ -59,17 +60,16 @@ public final class BungeeCore extends Plugin {
         }
     }
 
-    public String getConfigString(Config node, String defaultValue) {
-        String value = getConfigString(node);
-        return (value == null || value.isEmpty()) ? defaultValue : value;
-    }
-
     public String getConfigString(Config node) {
-        String envStr = System.getenv(node.name());
-        if (envStr != null) {
-            return envStr;
-        } else {
+        String value = System.getenv(node.name());
+        if (value == null && config.contains(node.getPath())) {
             return config.getString(node.getPath());
         }
+
+        return (value == null || value.isEmpty()) ? node.getDefaultValue() : value;
+    }
+
+    public boolean getConfigBoolean(Config node) {
+        return getConfigString(node).equalsIgnoreCase("true");
     }
 }
