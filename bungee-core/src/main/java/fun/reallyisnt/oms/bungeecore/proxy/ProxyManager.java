@@ -1,5 +1,6 @@
 package fun.reallyisnt.oms.bungeecore.proxy;
 
+import fun.reallyisnt.oms.bungeecore.BungeeCore;
 import fun.reallyisnt.oms.common.models.ProxyServer;
 import fun.reallyisnt.oms.common.repository.RedisProxyRepository;
 import net.md_5.bungee.api.event.ProxyPingEvent;
@@ -13,11 +14,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class ProxyManager implements Runnable, Listener {
 
+    private final String proxyName;
     private final RedisProxyRepository repository;
     private final AtomicInteger playerCount = new AtomicInteger();
 
-    public ProxyManager(Plugin plugin, JedisPool jedisPool) {
+    public ProxyManager(BungeeCore plugin, String proxyName, JedisPool jedisPool) {
         this.repository = new RedisProxyRepository(jedisPool);
+        this.proxyName = proxyName;
 
         plugin.getProxy().getPluginManager().registerListener(plugin, this);
         plugin.getProxy().getScheduler().schedule(plugin, this, 0L, 2000L, TimeUnit.MILLISECONDS);
@@ -45,6 +48,6 @@ public class ProxyManager implements Runnable, Listener {
     }
 
     public String getProxyName() {
-        return "";
+        return proxyName;
     }
 }

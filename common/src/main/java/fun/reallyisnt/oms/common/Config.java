@@ -2,6 +2,8 @@ package fun.reallyisnt.oms.common;
 
 public enum Config {
 
+    SERVER_NAME("server.name"),
+
     REDIS_ENABLED("redis.enabled", "true"),
     REDIS_HOST("redis.host"),
     REDIS_PORT("redis.port", "6379"),

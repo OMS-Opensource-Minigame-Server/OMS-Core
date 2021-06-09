@@ -1,5 +1,6 @@
 package fun.reallyisnt.oms.bungeecore;
 
+import fun.reallyisnt.oms.AgonesSDK;
 import fun.reallyisnt.oms.bungeecore.agones.AgonesManager;
 import fun.reallyisnt.oms.bungeecore.player.PlayerManager;
 import fun.reallyisnt.oms.bungeecore.proxy.ProxyManager;
@@ -9,7 +10,6 @@ import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
-import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 import java.io.File;
@@ -38,25 +38,25 @@ public final class BungeeCore extends Plugin {
             this.getLogger().log(Level.SEVERE, "Failed to load config", e);
         }
 
-        if (getConfigBoolean(Config.REDIS_ENABLED)) {
-            this.jedisPool = new JedisPool(new GenericObjectPoolConfig<>(), getConfigString(Config.REDIS_HOST), Integer.parseInt(getConfigString(Config.REDIS_PORT)), 100, getConfigString(Config.REDIS_PASSWORD));
-            ProxyManager proxyManager = new ProxyManager(this, jedisPool);
-            new PlayerManager(this, proxyManager, jedisPool);
-        }
+        String proxyName = getConfigString(Config.SERVER_NAME);
 
         if (getConfigBoolean(Config.AGONES_ENABLED)) {
-            getProxy().getPluginManager().registerListener(this, new AgonesManager(this));
+            AgonesSDK agonesSDK = new AgonesSDK();
+            proxyName = agonesSDK.gameServer().getMeta().getLabels().get("osm.reallyisnt.fun/ordinalname");
+            new AgonesManager(this, agonesSDK);
         }
 
-
+        if (getConfigBoolean(Config.REDIS_ENABLED)) {
+            this.jedisPool = new JedisPool(new GenericObjectPoolConfig<>(), getConfigString(Config.REDIS_HOST), Integer.parseInt(getConfigString(Config.REDIS_PORT)), 100, getConfigString(Config.REDIS_PASSWORD));
+            ProxyManager proxyManager = new ProxyManager(this, proxyName, jedisPool);
+            new PlayerManager(this, proxyManager, jedisPool);
+        }
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
-
-        if (getConfigString(Config.REDIS_ENABLED).equalsIgnoreCase("true")) {
-            this.jedisPool.close();
+        if (jedisPool != null && !jedisPool.isClosed()) {
+            jedisPool.close();
         }
     }
 

@@ -19,12 +19,14 @@ public class AgonesManager implements Listener {
     // How long a server should wait before it is allowed to be shutdown in milliseconds
     private final static long SHUTDOWN_THRESHOLD = 300000;
 
-    private final AgonesSDK agonesSDK = new AgonesSDK();
+    private final AgonesSDK agonesSDK;
     private final long startUpTime = System.currentTimeMillis();
 
-    public AgonesManager(Plugin plugin) {
+    public AgonesManager(Plugin plugin, AgonesSDK agonesSDK) {
+        this.agonesSDK = agonesSDK;
         agonesSDK.reserve(SHUTDOWN_THRESHOLD / 1000);
 
+        plugin.getProxy().getPluginManager().registerListener(plugin, this);
         // Schedule health ping every 2.5 seconds
         ProxyServer.getInstance().getScheduler().schedule(plugin, agonesSDK::health, 0L, 2500L, TimeUnit.MILLISECONDS);
     }
